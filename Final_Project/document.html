@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentation Page</title>
+</head>
+<body>
+<!---Header of the page-->
+<h3 style="background-color:grey; margin-top: 0"> Nav Bar:
+    <a href="test5.html"><span style="color: black;"> COVID-19 Bar Chart Visual </span></a> &nbsp;&nbsp; ||
+    <a href="document.html"><span style="color:black;"> Documentation Page </span></a> &nbsp;&nbsp; ||
+    <a><span style="color:black;">Video Tutorial Page [WORK IN PROGRESS] </span></a>
+</h3>
+
+
+<h4>Documentation For the Visual</h4>
+<p>
+    I used a straightforward design process to create this dynamic bar chart. I think that as much info as possible
+    should be available for the consumer to engage with. I initially had to make changes to the dataset's CSV file. The
+    dataset's numeric values were configured as strings, so when d3 parsed them, they wouldn't actually appear unless I
+    manually changed them to decimal numbers. After resolving that problem and further tidying it up, I was able to
+    begin working on the visual. I wanted to address the question of how to enable user interaction with the visual as
+    the initial part of the design. I don't want it to appear simplistic like a "hover" interaction, as with COVID-19
+    data (because most of them are).</p>
+<br>
+<p>
+    I thought that consumers should be able to filter by the characteristics that are important to them. I was aware
+    that the dataset contained a large number of attributes, but I only allowed the ones to be filtered that consumers
+    would genuinely care about. The best visualization for my data is a bar chart. The size of the dataset is to blame
+    for this. I would use a map using geojson and that interactive graphic using d3 if this was only the US or another
+    nation, but I wanted to represent COVID throughout the world's current situation.
+</p>
+<br>
+
+<text>Below is an example of a GeoJson Map generated in D3.</text>
+<br>
+<img src="geojsonmap.png" width="810" height="719"></img>
+<br>
+<p>
+    I didn't think that using a bar chart alone for my final project would be sufficient. Instead, I would proceed to
+    create two distinct radar plots. The global averages of the COVID data are the subject of one of these radar charts.
+    The other radar chart focuses on the totals for each particular nation. The radar chart is interactive in a few
+    different ways, one of which is that you can hover over the various sections to see the filter appear. I also
+    provided the consumers the option to edit the data whatever they pleased.
+    I accomplished this by hosting the data in a "textarea" so users don't have to be concerned about changing it. By
+    letting a user add or use previously gathered data values and pressing a button, the radar chart displays those
+    numbers. Making that image was absolutely awesome! I'm happy I was able to use them in my finished product! The
+    radar chart's color scheme is pleasing to the eye and makes it easier to grasp the data values. In actual use, a
+    user could add or delete nations to make the graphic even clearer or just to ensure that it only displays the
+    nations they are concerned about.
+    The total cases and total cases divided by population are just two of the many variables that make up the radar
+    chart (so it is detailed). Overall, the radar chart appeals to the eye, is distinctive when it comes to displaying
+    COVID data, and is a novel visual that I hope the user will like interacting with.
+</p>
+<br>
+<p>
+    In the end, I really enjoyed this final project because it taught me how to use JavaScript and d3 to create amazing
+    data visualizations. I've always created my graphics using Tableau or machine learning algorithms, but knowing d3
+    has truly changed the way I consider what tools to use to show my data. I'm glad I gave this course serious
+    consideration and incorporated it into my academic studies!
+</p>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>COVID-19 Bar Chart Visual</title>
+</head>
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<!---Header of the page-->
+<h3 style="background-color:grey; margin-top: 0"   > Nav Bar:
+    <a href="test5.html"><span style="color: black;"> COVID-19 Bar Chart Visual </span></a> &nbsp;&nbsp; ||
+    <a href="document.html"><span style="color:black;"> Documentation Page </span></a> &nbsp;&nbsp; ||
+    <a><span style="color:black;">Video Tutorial Page [WORK IN PROGRESS] </span></a>
+</h3>
+
+
+<!-- Add Filter Buttons -->
+<h2> World Wide COVID-19 Data:</h2>
+
+
+<!---These buttons will filter via case type -->
+<h4> Filter By: Case Type; &nbsp;
+    <button onclick="update('TotalCases')">Total</button>
+    <button onclick="update('ActiveCases')">Active</button>
+    <button onclick="update('CriticalCases')"> Critical</button>
+</h4>
+<h4>Filter By: Total Deaths or Recovered; &nbsp;
+    <button onclick="update('TotalDeaths')">Deaths</button>
+    <button onclick="update ('TotalRecovered')">Recovered</button>
+</h4>
+
+
+<!-- div -->
+<div id="viz"></div>
+<body>
+<script>
+  var margin = {top: 30, right: 30, bottom: 70, left: 60},
+          width = 8000 - margin.left - margin.right,
+          height = 400 - margin.top - margin.bottom;
+
+  var svg = d3.select("#viz")
+          .append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+          .attr("transform",
+                  "translate(" + margin.left + "," + margin.top + ")");
+
+  // x-axis
+  var x = d3.scaleBand()
+          .range([ 0, width ])
+          .padding(0.2);
+  var xaxis = svg.append("g")
+          .attr("transform", "translate(0," + height + ")")
+
+  // y-axis
+  var y = d3.scaleLinear()
+          .range([ height, 0]);
+  var yaxis = svg.append("g")
+          .attr("class", "myYaxis")
+
+
+  // selectedVar is a placeholder for the passed in parameter. (selectedVar is the parameter).
+  function update(selectedVar) {
+
+    // Parse the Data
+    d3.csv("data.csv", function(data) {
+
+      // define the x-axis
+      x.domain(data.map(function(d) { return d.Country; }))
+      xaxis.transition().duration(1000).call(d3.axisBottom(x))
+
+      // define the y-axis
+      y.domain([0, d3.max(data, function(d) { return +d[selectedVar] }) ]);
+      yaxis.transition().duration(1000).call(d3.axisLeft(y));
+
+      // variable u: will map the data for the bars.
+      var u = svg.selectAll("rect")
+              .data(data)
+
+      // u => updates the bars with the users selected var.
+      u
+              .enter()
+              .append("rect")
+              .merge(u)
+              .transition()
+              .duration(1000)
+              .attr("x", function(d) { return x(d.Country); })
+              .attr("y", function(d) { return y(d[selectedVar]); })
+              .attr("width", x.bandwidth())
+              .attr("height", function(d) { return height - y(d[selectedVar]); })
+              .attr("fill", "#000000")
+
+    })
+
+  }
+
+  // Initialize plot
+  update('TotalCases')
+</script>
+<h4>Click here to view the Radar chart to see the averages!
+    <button onclick="window.location.href='radar.html'">View Radar Chart for Averages</button>
+    <button onclick="window.location.href='radarCountries.html'"> View Radar Chart for Individual Countries</button>
+</h4>
+</body>
+</html>
